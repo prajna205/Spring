@@ -1,0 +1,6 @@
+package com.nt.beans;
+
+public class WishMessageGenerator {
+	//Has-A property supporting composition or injection
+
+}
