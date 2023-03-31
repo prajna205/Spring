@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd" xmlns:context="http://www.springframework.org/schema/context"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns="http://www.springframework.org/schema/beans">
+ 
+	<!--  dataSource cfgs-->
+	<bean id="hkds" class="com.zaxxer.hikari.HikariDataSource">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+		<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+		<property name="username" value="system"/>
+		<property name="password" value="1999"/>
+	</bean>
+	
+	<!--  jdbc template cfg-->
+	<bean id="template"  class="org.springframework.jdbc.core.JdbcTemplate">
+		<constructor-arg name="dataSource" ref="hkds"/>
+	</bean>
+	
+	<!--  DAO class cfg-->
+	<bean id="empDAO"  class="com.nt.dao.EmployeeDAOImpl">
+		<constructor-arg name="jt" ref="template"/>
+	</bean>
+	
+	<!-- service class cfgs -->
+	<bean id="empService"  class="com.nt.service.EmployeeMgmtServiceImpl">
+		<constructor-arg name="dao" ref="empDAO"/>
+	</bean>
+	
+
+</beans>
